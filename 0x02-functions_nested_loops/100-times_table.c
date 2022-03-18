@@ -1,47 +1,39 @@
-#include "main.h"
+#include <stdio.h>
+#include <math.h>
 
 /**
- * print_times_table - prints the n times table, starting with 0
- * @n: number of the times table
+ * main - finds and prints the largest prime factor of the number 612852475143
+ * followed by a new line
+ * Return: Always 0 (Success)
  */
-void print_times_table(int n)
+int main(void)
 {
-	int i, j, k;
+	long int n;
+	long int max;
+	long int i;
 
-	if (n >= 0 && n <= 15)
+	n = 612852475143;
+	max = -1;
+
+	while (n % 2 == 0)
 	{
-		for (i = 0; i <= n; i++)
+		max = 2;
+		n /= 2;
+	}
+
+	for (i = 3; i <= sqrt(n); i = i + 2)
+	{
+		while (n % i == 0)
 		{
-			for (j = 0; j <= n; j++)
-			{
-				k = j * i;
-				if (j == 0)
-				{
-					_putchar(k + '0');
-				} else if (k < 10 && j != 0)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(k + '0');
-				} else if (k >= 10 && k < 100)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar((k / 10) + '0');
-					_putchar((k % 10) + '0');
-				} else if (k >= 100)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar((k / 100) + '0');
-					_putchar(((k / 10) % 10) + '0');
-					_putchar((k % 10) + '0');
-				}
-			}
-			_putchar('\n');
+			max = i;
+			n = n / i;
 		}
 	}
+
+	if (n > 2)
+		max = n;
+
+	printf("%ld\n", max);
+
+	return (0);
 }
